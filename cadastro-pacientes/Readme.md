@@ -21,6 +21,6 @@
 
 Atenções
 - Ambiente: 
-  - npm install --save-dev @babel/plugin-proposal-private-property-in-object
   - npm version = 6.14.15
   - node version = v14.17.6
+  - npm install --save-dev @babel/plugin-proposal-private-property-in-object

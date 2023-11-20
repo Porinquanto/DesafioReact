@@ -1,32 +1,43 @@
 // src/components/TabelaPacientes.js
 import React from 'react';
-import Paciente from './Paciente';
+import '../App.css';
 
-// Componente para exibir uma tabela simples de pacientes
-const TabelaPacientes = ({ pacientes, onRemover }) => {
-  // Função para remover um paciente da lista e atualizar o localStorage
-  const handleRemover = (pacienteRemovido) => {
-    onRemover(pacienteRemovido);
-    const novosPacientes = pacientes.filter((paciente) => paciente !== pacienteRemovido);
-    localStorage.setItem('pacientes', JSON.stringify(novosPacientes));
-  };
 
+const TabelaPacientes = ({ pacientes, onRemover, onEditar }) => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Idade</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        {pacientes.map((paciente) => (
-          // Renderizar o componente Paciente para cada linha
-          <Paciente key={paciente.id} paciente={paciente} onRemover={handleRemover} />
-        ))}
-      </tbody>
-    </table>
+    <div className="table-container">
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Idade</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pacientes.map((paciente) => (
+            <tr key={paciente.id}>
+              <td>{paciente.id}</td>
+              <td>{paciente.nome}</td>
+              <td>{paciente.idade}</td>
+              <td>{paciente.sexo}</td>
+              <td>{paciente.status}</td>
+              <td>
+                <button className="button-editar" onClick={() => onEditar(paciente)}>
+                  Editar
+                </button>
+                <button className="button-remover" onClick={() => onRemover(paciente)}>
+                  Remover
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
